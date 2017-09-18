@@ -10,13 +10,12 @@ EBTNodeResult::Type UChooseNextWaypoint::ExecuteTask(UBehaviorTreeComponent & Ow
 {
 	auto ControlledPawn = OwnerComp.GetAIOwner()->GetPawn();
 	auto PatrolRoute = ControlledPawn->FindComponentByClass<UPatrolRoute>();
-	if (!ensure(PatrolRoute)) {
-		UE_LOG(LogTemp, Warning, TEXT("12312323123")); return EBTNodeResult::Failed; }
+	if (!ensure(PatrolRoute)) { return EBTNodeResult::Failed; }
 
 	auto PatrolPoints = PatrolRoute->GetPatrolPoints();
 	if (PatrolPoints.Num() == 0)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("A guard is missing patrol points"));
+		UE_LOG(LogTemp, Warning, TEXT("No patrol points on guard"));
 		return EBTNodeResult::Failed;
 	}
 
